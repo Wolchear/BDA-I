@@ -1,0 +1,26 @@
+# Dirs
+data:
+  base_root: "data"
+  dirs:
+    raw: "raw"
+
+workflow:
+  base_root: "workflow"
+  dirs:
+    rules: "rules"
+    scripts: "scripts"
+
+# Files
+sra:
+  - SRR11647685  # GSM4505876
+  - SRR11647686  # GSM4505877
+  - SRR11647687  # GSM4505878
+  - SRR11647695  # GSM4505886
+  - SRR11647696  # GSM4505887
+  - SRR11647697  # GSM4505888
+
+suffix:
+  fasta: 'fasta'
+  fastq: 'fastq'
+
+

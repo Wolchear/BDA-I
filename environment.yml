@@ -9,3 +9,4 @@ channels:
 dependencies:
   - python=3.12
   - snakemake>=9.13.7
+  - sra-tools>=3.2.1
