@@ -3,6 +3,7 @@ data:
   base_root: "data"
   dirs:
     raw: "raw"
+    references: "references"
 
 workflow:
   base_root: "workflow"
