@@ -1,14 +1,13 @@
 from workflow.lib.utils import get_path
 
-
 RAW_DIR = get_path(config["data"], 'raw')
 FASTQ_SUFFIX = config['suffix']['fastq']
-
+FASTERQ_PARAMS = config['fasterq']
 rule get_data:
     output:
         fasta_1 = f"{RAW_DIR}/{{acc}}_1.{FASTQ_SUFFIX}",
         fasta_2 = f"{RAW_DIR}/{{acc}}_2.{FASTQ_SUFFIX}"
-    threads: 2
+    threads: FASTERQ_PARAMS['threads']
     params:
         acc="{acc}",
         outdir=RAW_DIR

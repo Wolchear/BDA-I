@@ -10,6 +10,7 @@ workflow:
   dirs:
     rules: "rules"
     scripts: "scripts"
+    lib: "lib"
 
 # Files
 sra:
@@ -24,4 +25,8 @@ suffix:
   fasta: 'fasta'
   fastq: 'fastq'
 
+
+# Programs
+fasterq:
+  threads: 4
 
