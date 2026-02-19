@@ -5,3 +5,4 @@ logs/*
 *.fasta
 *.fastq
 *.gz
+*.zip

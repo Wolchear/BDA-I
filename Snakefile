@@ -22,7 +22,7 @@ rule all:
         ),
         # output/reports/{acc}_1\2.html
         expand(
-            "{data_dir}/{acc}_{paired_id}.{suffix}",
+            "{data_dir}/{acc}_{paired_id}_fastqc.{suffix}",
             data_dir=get_path(OUTPUT,'reports'),
             acc=SRA,
             suffix=SUFFIX["report"],

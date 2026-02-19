@@ -26,6 +26,6 @@ rule get_data:
         --threads {threads} \
         2> {log}
 
-        pigz -p {threads} {out.outdir}/{wildcards.acc}_1.fastq
+        pigz -p {threads} {params.outdir}/{wildcards.acc}_1.fastq
         pigz -p {threads} {params.outdir}/{wildcards.acc}_2.fastq
         """
