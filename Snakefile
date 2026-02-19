@@ -21,13 +21,13 @@ rule all:
             paired_id = config['paired_id']
         ),
         # output/reports/{acc}_1\2.html
-        #expand(
-        #    "{data_dir}/{acc}_{paired_id}.{suffix}",
-        #    data_dir=get_path(OUTPUT,'reports'),
-        #    acc=SRA,
-        #    suffix=SUFFIX["report"],
-        #    paired_id = config['paired_id']
-        #)
+        expand(
+            "{data_dir}/{acc}_{paired_id}.{suffix}",
+            data_dir=get_path(OUTPUT,'reports'),
+            acc=SRA,
+            suffix=SUFFIX["report"],
+            paired_id = config['paired_id']
+        )
 
 
 
@@ -38,7 +38,7 @@ module raw_data:
     config: config
 use rule * from raw_data
 
-#module fast_qc:
-#    snakefile: f"{RULES_DIR}/fast_qc.smk"
-#    config: config
-#use rule * from fast_qc
+module fast_qc:
+    snakefile: f"{RULES_DIR}/fast_qc.smk"
+    config: config
+use rule * from fast_qc
