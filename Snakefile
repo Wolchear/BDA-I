@@ -7,19 +7,27 @@ configfile: "config.yaml"
 
 SUFFIX = config["suffix"]
 DATA = config['data']
+OUTPUT = config['output']
 SRA = config['sra']
 
 rule all:
     input:
-        # data/raw/{acc}_1\2.fastq
+        # data/raw/{acc}_1\2.fastq.gz
         expand(
-            "{data_dir}/{acc}_{paired}.{suffix}",
+            "{data_dir}/{acc}_{paired_id}.{suffix}",
             data_dir=get_path(DATA,'raw'),
             acc=SRA,
-            suffix=SUFFIX["fastq"],
-            paired = ['1', '2']
-        )
-
+            suffix=f'{SUFFIX["fastq"]}.{SUFFIX["compress"]}',
+            paired_id = config['paired_id']
+        ),
+        # output/reports/{acc}_1\2.html
+        #expand(
+        #    "{data_dir}/{acc}_{paired_id}.{suffix}",
+        #    data_dir=get_path(OUTPUT,'reports'),
+        #    acc=SRA,
+        #    suffix=SUFFIX["report"],
+        #    paired_id = config['paired_id']
+        #)
 
 
 
@@ -29,3 +37,8 @@ module raw_data:
     snakefile: f"{RULES_DIR}/raw_data.smk"
     config: config
 use rule * from raw_data
+
+#module fast_qc:
+#    snakefile: f"{RULES_DIR}/fast_qc.smk"
+#    config: config
+#use rule * from fast_qc

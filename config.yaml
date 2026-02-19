@@ -5,6 +5,12 @@ data:
     raw: "raw"
     references: "references"
 
+output:
+  base_root: "output"
+  dirs:
+    reports: "reports"
+
+
 workflow:
   base_root: "workflow"
   dirs:
@@ -24,9 +30,17 @@ sra:
 suffix:
   fasta: 'fasta'
   fastq: 'fastq'
+  report: 'html'
+  compress: 'gz'
 
+# States
+paired_id:
+  - 1
+  - 2
 
-# Programs
-fasterq:
+# Program's params
+fasterq_params:
   threads: 4
 
+fastqc_params:
+  threads: 4

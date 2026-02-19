@@ -4,3 +4,4 @@ logs/*
 *.pyc
 *.fasta
 *.fastq
+*.gz
