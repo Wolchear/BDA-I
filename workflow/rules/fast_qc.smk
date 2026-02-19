@@ -8,14 +8,16 @@ FASTQC_PARAMS = config['fastqc_params']
 
 rule fastqc:
     input:
+        f"{RAW_DIR}/{{acc}}_{{paired_id}}.{RAW_DATA_SUFFIX}"
+    output:
         html = f"{REPORTS_DIR}/{{acc}}_{{paired_id}}_fastqc.html",
         zip  = f"{REPORTS_DIR}/{{acc}}_{{paired_id}}_fastqc.zip"
-    output:
-        f"{REPORTS_DIR}/{{acc}}_{{paired_id}}.{REPORT_SUFFIX}"
+    wildcard_constraints:
+        paired_id="1|2"
     threads: FASTQC_PARAMS['threads']
     params:
-        outdir={REPORTS_DIR}
+        outdir = REPORTS_DIR
     shell:
-        r"""
+        """
         fastqc -t {threads} -o {params.outdir} {input}
         """
