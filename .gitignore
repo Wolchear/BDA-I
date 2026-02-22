@@ -1,5 +1,6 @@
 .snakemake
 logs/*
+data/*
 
 *.pyc
 *.fasta
