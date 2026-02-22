@@ -30,7 +30,6 @@ rule all:
         )
 
 
-
 RULES_DIR = get_path(config['workflow'], "rules")
 
 module raw_data:
@@ -42,3 +41,8 @@ module fast_qc:
     snakefile: f"{RULES_DIR}/fast_qc.smk"
     config: config
 use rule * from fast_qc
+
+module ref:
+    snakefile: f"{RULES_DIR}/ref.smk"
+    config: config
+use rule * from ref

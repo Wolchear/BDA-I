@@ -4,11 +4,13 @@ data:
   dirs:
     raw: "raw"
     references: "references"
+    index: "star_index"
 
 output:
   base_root: "output"
   dirs:
     reports: "reports"
+    mapped: 'mapped'
 
 
 workflow:
@@ -26,6 +28,14 @@ sra:
   - SRR11647695  # GSM4505886
   - SRR11647696  # GSM4505887
   - SRR11647697  # GSM4505888
+
+ref:
+  annotation:
+    link: "https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_49/gencode.v49.primary_assembly.annotation.gtf.gz"
+    file_name: "gencode_annotation_v49.gtf"
+  genome: 
+    link: "https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_49/GRCh38.primary_assembly.genome.fa.gz"
+    file_name: "homo_GRCh38_ref.fa"
 
 suffix:
   fasta: 'fasta'
