@@ -27,6 +27,11 @@ rule all:
             acc=SRA,
             suffix=SUFFIX["report"],
             paired_id = config['paired_id']
+        ),
+        expand(
+            "{out_dir}/{acc}.sorted.bam.bai",
+            out_dir=get_path(OUTPUT,'mapped'),
+            acc=SRA
         )
 
 
@@ -46,3 +51,8 @@ module ref:
     snakefile: f"{RULES_DIR}/ref.smk"
     config: config
 use rule * from ref
+
+module hisat:
+    snakefile: f"{RULES_DIR}/hisat.smk"
+    config: config
+use rule * from hisat
