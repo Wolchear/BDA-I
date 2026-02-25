@@ -7,3 +7,4 @@ data/*
 *.fastq
 *.gz
 *.zip
+*.bam*
