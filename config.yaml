@@ -4,7 +4,7 @@ data:
   dirs:
     raw: "raw"
     references: "references"
-    index: "star_index"
+    index: "hisat_index"
 
 output:
   base_root: "output"
@@ -54,3 +54,8 @@ fasterq_params:
 
 fastqc_params:
   threads: 4
+
+hisat-build_params:
+  threads: 6
+  seed: 1
+  prefix: 'hisat2_index'
