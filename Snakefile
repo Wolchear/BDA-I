@@ -9,6 +9,8 @@ SUFFIX = config["suffix"]
 DATA = config['data']
 OUTPUT = config['output']
 SRA = config['sra']
+QC = config['qc']
+PLOT_DIR =  get_path(QC, "mapping")
 
 rule all:
     input:
@@ -32,7 +34,8 @@ rule all:
             "{out_dir}/{acc}.sorted.bam.bai",
             out_dir=get_path(OUTPUT,'mapped'),
             acc=SRA
-        )
+        ),
+        f"{PLOT_DIR}/mapping_rates.png"
 
 
 RULES_DIR = get_path(config['workflow'], "rules")
@@ -56,3 +59,8 @@ module hisat:
     snakefile: f"{RULES_DIR}/hisat.smk"
     config: config
 use rule * from hisat
+
+module mapping_qc:
+    snakefile: f"{RULES_DIR}/mapping_QC.smk"
+    config: config
+use rule * from mapping_qc

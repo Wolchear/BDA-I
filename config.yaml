@@ -12,6 +12,10 @@ output:
     reports: "reports"
     mapped: 'mapped'
 
+qc:
+  base_root: "QC"
+  dirs:
+    mapping: 'mapping'
 
 workflow:
   base_root: "workflow"
@@ -59,3 +63,7 @@ hisat-build_params:
   threads: 6
   seed: 1
   prefix: 'hisat2_index'
+
+
+mapping_qc_params:
+  script: workflow/scripts/plot_mapping_rates.py
