@@ -10,7 +10,7 @@ DATA = config['data']
 OUTPUT = config['output']
 SRA = config['sra']
 QC = config['qc']
-PLOT_DIR =  get_path(QC, "mapping")
+PLOTS = config['qc_plots']
 
 rule all:
     input:
@@ -35,7 +35,11 @@ rule all:
             out_dir=get_path(OUTPUT,'mapped'),
             acc=SRA
         ),
-        f"{PLOT_DIR}/mapping_rates.png"
+        expand(
+            "{plot_dir}/{plot}.png",
+            plot=PLOTS,
+            plot_dir=get_path(QC, 'mapping')
+        )
 
 
 RULES_DIR = get_path(config['workflow'], "rules")

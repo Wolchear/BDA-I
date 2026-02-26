@@ -40,12 +40,20 @@ ref:
   genome: 
     link: "https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_49/GRCh38.primary_assembly.genome.fa.gz"
     file_name: "homo_GRCh38_ref.fa"
+  bed_annotation:
+    link: "https://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg38_GENCODE_V47.bed.gz"
+    file_name: "hg38_GENCODE_V47.bed"
 
 suffix:
   fasta: 'fasta'
   fastq: 'fastq'
   report: 'html'
   compress: 'gz'
+
+qc_plots:
+  - 'correlation'
+  - 'pca'
+  - 'mapping_rates'
 
 # States
 paired_id:
@@ -63,7 +71,6 @@ hisat-build_params:
   threads: 6
   seed: 1
   prefix: 'hisat2_index'
-
 
 mapping_qc_params:
   script: workflow/scripts/plot_mapping_rates.py

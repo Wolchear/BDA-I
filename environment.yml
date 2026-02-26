@@ -16,3 +16,5 @@ dependencies:
   - hisat2>=2.2
   - samtools>=1.2
   - matplotlib>=3.10
+  - deeptools>=3.5.6
+  - rseqc>=5.0
