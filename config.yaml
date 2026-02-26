@@ -54,6 +54,10 @@ qc_plots:
   - 'correlation'
   - 'pca'
   - 'mapping_rates'
+  - 'all.geneBodyCoverage.curves'
+  - 'all.clipping_profile'
+  - 'all.inner_distance'
+  - 'all.junction_annotation'
 
 # States
 paired_id:
