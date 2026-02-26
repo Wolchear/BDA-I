@@ -46,7 +46,7 @@ rule fastqc_trimmed:
 
 rule multiqc_raw:
     input:
-        expand(f"{RAW_REPORTS_DIR}/{{acc}}_{{paired_id}}_fastqc.html",
+        expand(f"{RAW_REPORTS_DIR}/{{acc}}_{{paired_id}}_fastqc.zip",
                acc=SRA, paired_id=["1","2"])
     output:
         html = f"{RAW_REPORTS_DIR}/multiqc.{REPORT_SUFFIX}",
@@ -65,7 +65,7 @@ rule multiqc_raw:
 
 rule multiqc_trimmed:
     input:
-        expand(f"{TRIMMED_REPORTS_DIR}/{{acc}}_{{paired_id}}_fastqc.html",
+        expand(f"{TRIMMED_REPORTS_DIR}/{{acc}}_{{paired_id}}_fastqc.zip",
                acc=SRA, paired_id=["1","2"])
     output:
         html = f"{TRIMMED_REPORTS_DIR}/multiqc.{REPORT_SUFFIX}",
