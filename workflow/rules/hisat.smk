@@ -7,8 +7,7 @@ HISAT_DIR = get_path(config["data"], 'index')
 HISAT_BUILD_PARAMS = config['hisat-build_params']
 
 MAPPED_DIR =  get_path(config["output"], "mapped")
-RAW_DIR = get_path(config["data"], 'raw')
-
+TRIMMED_DIR = get_path(config["data"], 'trimmed')
 FASTQ_SUFFIX = config['suffix']['fastq']
 COMPRESSED_SUFFIX = config['suffix']['compress']
 HISAT_PREFIX = f"{HISAT_DIR}/{HISAT_BUILD_PARAMS['prefix']}"
@@ -47,8 +46,8 @@ rule align:
     input:
         idx=rules.build_index.output.done,
         ss=rules.get_splice_sites.output,
-        fasta_1 = f"{RAW_DIR}/{{acc}}_1.{FASTQ_SUFFIX}.{COMPRESSED_SUFFIX}",
-        fasta_2 = f"{RAW_DIR}/{{acc}}_2.{FASTQ_SUFFIX}.{COMPRESSED_SUFFIX}"
+        fasta_1 = f"{TRIMMED_DIR}/{{acc}}_1.{FASTQ_SUFFIX}.{COMPRESSED_SUFFIX}",
+        fasta_2 = f"{TRIMMED_DIR}/{{acc}}_2.{FASTQ_SUFFIX}.{COMPRESSED_SUFFIX}"
     output:
         bam = f"{MAPPED_DIR}/{{acc}}.sorted.bam",
         bai = f"{MAPPED_DIR}/{{acc}}.sorted.bam.bai"

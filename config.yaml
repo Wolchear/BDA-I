@@ -5,6 +5,7 @@ data:
     raw: "raw"
     references: "references"
     index: "hisat_index"
+    trimmed: "trimmed"
 
 output:
   base_root: "output"

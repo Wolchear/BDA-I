@@ -17,7 +17,7 @@ rule all:
         # data/raw/{acc}_1\2.fastq.gz
         expand(
             "{data_dir}/{acc}_{paired_id}.{suffix}",
-            data_dir=get_path(DATA,'raw'),
+            data_dir=get_path(DATA,'trimmed'),
             acc=SRA,
             suffix=f'{SUFFIX["fastq"]}.{SUFFIX["compress"]}',
             paired_id = config['paired_id']
