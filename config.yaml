@@ -68,10 +68,10 @@ paired_id:
 
 # Program's params
 fasterq_params:
-  threads: 4
+  threads: 3
 
 fastqc_params:
-  threads: 4
+  threads: 3
 
 hisat-build_params:
   threads: 6

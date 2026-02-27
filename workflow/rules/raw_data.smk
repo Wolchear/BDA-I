@@ -50,7 +50,6 @@ rule trim:
                     --gzip \
                     --basename {wildcards.acc} \
                     --output_dir {params.outdir} \
-                    --polyA \
                     {input.r1} {input.r2}
 
         mv {params.tmp_1} {output.r1}
