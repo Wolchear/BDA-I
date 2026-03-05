@@ -65,7 +65,8 @@ rule align:
             -2 {input.fasta_2} \
             -p {threads} \
             --known-splicesite-infile {input.ss} \
-            --dta --very-sensitive \
+            --no-unal \
+            --very-sensitive \
             --no-mixed --no-discordant \
             2> {log} \
         | samtools view -@ {threads} -b - \
