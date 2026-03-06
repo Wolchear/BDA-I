@@ -53,13 +53,17 @@ suffix:
   compress: 'gz'
 
 qc_plots:
-  - 'correlation'
-  - 'pca'
-  - 'mapping_rates'
-  - 'all.geneBodyCoverage.curves'
-  - 'all.clipping_profile'
-  - 'all.inner_distance'
-  - 'all.junction_annotation'
+  deep-tools:
+    - 'correlation'
+    - 'pca'
+  custom:
+    - 'mapping_rates'
+  rseqc:
+    - 'all.geneBodyCoverage.curves'
+    - 'all.clipping_profile'
+    - 'all.inner_distance_plot'
+    - 'all.splice_junction'
+  #  - 'all.splice_events'
 
 # States
 paired_id:

@@ -35,7 +35,17 @@ rule all:
         ),
         expand(
             "{plot_dir}/{plot}.png",
-            plot=PLOTS,
+            plot=PLOTS['deep-tools'],
+            plot_dir=get_path(QC, 'mapping')
+        ),
+        expand(
+            "{plot_dir}/{plot}.png",
+            plot=PLOTS['custom'],
+            plot_dir=get_path(QC, 'mapping')
+        ),
+        expand(
+            "{plot_dir}/{plot}.pdf",
+            plot=PLOTS['rseqc'],
             plot_dir=get_path(QC, 'mapping')
         )
 

@@ -67,7 +67,7 @@ rule plot_gene_body_coverege:
         bams = expand(f"{MAPPED_DIR}/{{acc}}.sorted.bam", acc=SRA),
         bed = f"{REF_DIR}/{BED_ANNOT_CONF['file_name']}"
     output:
-        f"{PREFIX}.geneBodyCoverage.curves.png"
+        f"{PREFIX}.geneBodyCoverage.curves.pdf"
     params:
         prefix=PREFIX
     threads: 1
@@ -75,52 +75,106 @@ rule plot_gene_body_coverege:
         r"""
         geneBody_coverage.py -i {input.bams} \
                              -r {input.bed} \
-                             -f png \
                              -o {params.prefix}
         """
 
 rule plot_inner_distance:
     input:
-        bams = expand("{mapped_dir}/{acc}.sorted.bam", mapped_dir=MAPPED_DIR, acc=SRA),
+        bam = f"{MAPPED_DIR}/{{acc}}.sorted.bam",
         bed  = f"{REF_DIR}/{BED_ANNOT_CONF['file_name']}"
     output:
-        f"{PREFIX}.inner_distance.png"
+        plot = f"{PLOT_DIR}/inner_distances/{{acc}}.inner_distance_plot.pdf",
+        freq = f"{PLOT_DIR}/inner_distances/{{acc}}.inner_distance_freq.txt",
+        meta = f"{PLOT_DIR}/inner_distances/{{acc}}.inner_distance.txt"
+    log:
+        f"logs/rseqc/inner_distances/{{acc}}.log"
     params:
-        prefix=f"{PREFIX}"
+        prefix=f"{PLOT_DIR}/inner_distances/{{acc}}"
     threads: 1
     shell:
         r"""
-        inner_distance.py -i {input.bams} \
+        inner_distance.py -i {input.bam} \
                           -r {input.bed} \
-                          -o {params.prefix}
+                          -o {params.prefix} \
+                          > {log} 2>&1
+        """
+    
+
+rule inner_distance_aggr:
+    input:
+        expand(f"{PLOT_DIR}/inner_distances/{{acc}}.inner_distance_freq.txt", acc=SRA)
+    output:
+        f"{PREFIX}.inner_distance_plot.pdf"
+    threads: 1
+    shell:
+        r"""
+        touch {output}
         """
 
 rule plot_clipping_profile:
     input:
-        bams = expand("{mapped_dir}/{acc}.sorted.bam", mapped_dir=MAPPED_DIR, acc=SRA)
+        f"{MAPPED_DIR}/{{acc}}.sorted.bam"
     output:
-        f"{PREFIX}.clipping_profile.png"
+        r1=f"{PLOT_DIR}/clipping_profile/{{acc}}.clipping_profile.R1.pdf",
+        r2=f"{PLOT_DIR}/clipping_profile/{{acc}}.clipping_profile.R2.pdf",
+        info=f"{PLOT_DIR}/clipping_profile/{{acc}}.clipping_profile.xls"
+    log:
+        f"logs/rseqc/clipping/{{acc}}.log"
     params:
-        prefix=f"{PREFIX}"
+        prefix=f"{PLOT_DIR}/clipping_profile/{{acc}}"
     threads: 1
     shell:
         r"""
-        clipping_profile.py -i {input.bams} \
-                            -o {params.prefix}
+        clipping_profile.py -i {input} \
+                            -o {params.prefix} \
+                            -s "PE" \
+                            > {log} 2>&1
+        """
+
+rule plot_clipping_aggr:
+    input:
+        expand(f"{PLOT_DIR}/clipping_profile/{{acc}}.clipping_profile.xls", acc=SRA)
+    output:
+        f"{PREFIX}.clipping_profile.pdf"
+    threads: 1
+    shell:
+        r"""
+        touch {output}
         """
 
 rule plot_annotated_junctions:
     input:
-        bams = expand("{mapped_dir}/{acc}.sorted.bam", mapped_dir=MAPPED_DIR, acc=SRA),
+        bam = f"{MAPPED_DIR}/{{acc}}.sorted.bam",
         bed  = f"{REF_DIR}/{BED_ANNOT_CONF['file_name']}"
     output:
-        f"{PREFIX}.junction_annotation.png"
+        events   = f"{PLOT_DIR}/junction_annotation/{{acc}}.splice_events.pdf",
+        junction = f"{PLOT_DIR}/junction_annotation/{{acc}}.splice_junction.pdf",
+        xls      = f"{PLOT_DIR}/junction_annotation/{{acc}}.junction.xls",
+        bed      = f"{PLOT_DIR}/junction_annotation/{{acc}}.junction.bed",
+        ibed     = f"{PLOT_DIR}/junction_annotation/{{acc}}.junction.Interact.bed",
+        rscript  = f"{PLOT_DIR}/junction_annotation/{{acc}}.junction_plot.r"
+    log:
+        f"logs/rseqc/junction_annotation/{{acc}}.log"
     params:
-        prefix=f"{PREFIX}"
+        prefix=f"{PLOT_DIR}/junction_annotation/{{acc}}"
     threads: 1
     shell:
         r"""
-        junction_annotation.py -i {input.bams} \
+        junction_annotation.py -i {input.bam} \
                                -r {input.bed} \
-                               -o {params.prefix}
+                               -o {params.prefix} \
+                               > {log} 2>&1
+        """
+
+rule junction_annotation_aggr:
+    input:
+        expand(f"{PLOT_DIR}/junction_annotation/{{acc}}.junction.xls", acc=SRA)
+    output:
+        events = f"{PREFIX}.splice_events.pdf",
+        junctions = f"{PREFIX}.splice_junction.pdf"
+    threads: 1
+    shell:
+        r"""
+        touch {output.events}
+        touch {output.junctions}
         """
