@@ -69,11 +69,12 @@ rule plot_gene_body_coverege:
     output:
         f"{PREFIX}.geneBodyCoverage.curves.pdf"
     params:
-        prefix=PREFIX
+        prefix=PREFIX,
+        bam_list = lambda wildcards, input: ",".join(input.bams)
     threads: 1
     shell:
         r"""
-        geneBody_coverage.py -i {input.bams} \
+        geneBody_coverage.py -i {params.bam_list} \
                              -r {input.bed} \
                              -o {params.prefix}
         """
