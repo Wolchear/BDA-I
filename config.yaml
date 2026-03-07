@@ -82,5 +82,8 @@ hisat-build_params:
   seed: 1
   prefix: 'hisat2_index'
 
-mapping_qc_params:
-  script: workflow/scripts/plot_mapping_rates.py
+mapping_qc_scripts:
+    mapping_rates: workflow/scripts/plot_mapping_rates.py
+    aggregate_clipping: workflow/scripts/aggregate_clipping_profiles.r
+    aggregate_inner: workflow/scripts/aggregate_inner_distance.r
+    aggregate_splice: workflow/scripts/aggregate_junction_anntotation.r

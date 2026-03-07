@@ -3,10 +3,13 @@ from workflow.lib.utils import get_path
 REF_DIR = get_path(config["data"], 'references')
 PLOT_DIR =  get_path(config["qc"], "mapping")
 SRA = config['sra']
-QC_SCRIPT = config['mapping_qc_params']['script']
+QC_SCRIPTS = config['mapping_qc_scripts']
+MAPPING_RATES_SCRIPT = QC_SCRIPTS['mapping_rates']
+AGGR_INNER = QC_SCRIPTS['aggregate_inner']
+AGGR_CLIP = QC_SCRIPTS['aggregate_clipping']
+AGGR_JUN = QC_SCRIPTS['aggregate_splice']
 
 MAPPED_DIR =  get_path(config["output"], "mapped")
-
 BED_ANNOT_CONF = config["ref"]['bed_annotation']
 PREFIX = f"{PLOT_DIR}/all"
 
@@ -17,7 +20,7 @@ rule plot_mapping_rates:
         f"{PLOT_DIR}/mapping_rates.png"
     params:
         log_dir="logs/hisat2",
-        script=QC_SCRIPT
+        script=MAPPING_RATES_SCRIPT
     threads:1
     shell:
         r"""
@@ -107,9 +110,13 @@ rule inner_distance_aggr:
     output:
         f"{PREFIX}.inner_distance_plot.pdf"
     threads: 1
+    params:
+        script=AGGR_INNER,
+        i_dir=f"{PLOT_DIR}/inner_distances",
+        prefix=PREFIX
     shell:
         r"""
-        touch {output}
+        Rscript {params.script} {params.i_dir} {params.prefix}
         """
 
 rule plot_clipping_profile:
@@ -138,9 +145,13 @@ rule plot_clipping_aggr:
     output:
         f"{PREFIX}.clipping_profile.pdf"
     threads: 1
+    params:
+        script=AGGR_CLIP,
+        i_dir=f"{PLOT_DIR}/clipping_profile",
+        prefix=PREFIX
     shell:
         r"""
-        touch {output}
+        Rscript {params.script} {params.i_dir} {params.prefix}
         """
 
 rule plot_annotated_junctions:
@@ -174,8 +185,11 @@ rule junction_annotation_aggr:
         events = f"{PREFIX}.splice_events.pdf",
         junctions = f"{PREFIX}.splice_junction.pdf"
     threads: 1
+    params:
+        script=AGGR_JUN,
+        i_dir=f"{PLOT_DIR}/junction_annotation",
+        prefix=PREFIX
     shell:
         r"""
-        touch {output.events}
-        touch {output.junctions}
+        Rscript {params.script} {params.i_dir} {params.prefix}
         """
