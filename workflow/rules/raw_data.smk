@@ -38,20 +38,22 @@ rule trim:
     output:
         r1=f"{TRIMMED_DIR}/{{acc}}_1.{FASTQ_SUFFIX}.{GZIPPED_SUFFIX}",
         r2=f"{TRIMMED_DIR}/{{acc}}_2.{FASTQ_SUFFIX}.{GZIPPED_SUFFIX}",
+        report=f"{TRIMMED_DIR}/{{acc}}.cutadapt.txt"
     threads: 3
     params:
         tmp_1 = f"{TRIMMED_DIR}/{{acc}}_val_1.fq.gz",
         tmp_2 = f"{TRIMMED_DIR}/{{acc}}_val_2.fq.gz",
         outdir = TRIMMED_DIR
     shell:
-        r"""
-        trim_galore --paired \
-                    --cores {threads} \
-                    --gzip \
-                    --basename {wildcards.acc} \
-                    --output_dir {params.outdir} \
-                    {input.r1} {input.r2}
-
-        mv {params.tmp_1} {output.r1}
-        mv {params.tmp_2} {output.r2}
+       r"""
+        cutadapt \
+            -j {threads} \
+            -q 20 \
+            -m 20 \
+            -a A{{10}} \
+            -A T{{10}} \
+            -o {output.r1} \
+            -p {output.r2} \
+            {input.r1} {input.r2} \
+            > {output.report} 2>&1
         """
