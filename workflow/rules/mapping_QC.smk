@@ -72,7 +72,7 @@ rule plot_gene_body_coverage:
     output:
         f"{PREFIX}.geneBodyCoverage.curves.pdf"
     log:
-        f"logs/rseqc/gene_body_coverage/{{acc}}.log"
+        f"logs/rseqc/gene_body_coverage/gene_body_coverage.log"
     params:
         prefix=PREFIX,
         bam_list = lambda wildcards, input: ",".join(input.bams)
