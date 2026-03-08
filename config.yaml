@@ -43,8 +43,9 @@ ref:
     link: "https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_49/GRCh38.primary_assembly.genome.fa.gz"
     file_name: "homo_GRCh38_ref.fa"
   bed_annotation:
-    link: "https://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg38_GENCODE_V47.bed.gz"
-    file_name: "hg38_GENCODE_V47.bed"
+    link: "https://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg38_GENCODE_V45_Basic.bed.gz"
+    file_name: "hg38_GENCODE_V45.bed"
+    
 
 suffix:
   fasta: 'fasta'

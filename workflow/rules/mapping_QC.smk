@@ -65,12 +65,14 @@ rule plot_PCA:
         plotPCA  -in {input} -o {output}
         """
 
-rule plot_gene_body_coverege:
+rule plot_gene_body_coverage:
     input:
         bams = expand(f"{MAPPED_DIR}/{{acc}}.sorted.bam", acc=SRA),
         bed = f"{REF_DIR}/{BED_ANNOT_CONF['file_name']}"
     output:
         f"{PREFIX}.geneBodyCoverage.curves.pdf"
+    log:
+        f"logs/rseqc/gene_body_coverage/{{acc}}.log"
     params:
         prefix=PREFIX,
         bam_list = lambda wildcards, input: ",".join(input.bams)
@@ -79,7 +81,8 @@ rule plot_gene_body_coverege:
         r"""
         geneBody_coverage.py -i {params.bam_list} \
                              -r {input.bed} \
-                             -o {params.prefix}
+                             -o {params.prefix} \
+                             > {log} 2>&1
         """
 
 rule plot_inner_distance:
