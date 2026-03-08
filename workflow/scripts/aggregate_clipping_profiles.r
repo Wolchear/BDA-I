@@ -69,5 +69,5 @@ files <- list.files(input_dir, pattern="\\.xls$", full.names=TRUE)
 samples <- sub("\\.clipping_profile.xls$", "", basename(files))
 cols <- rainbow(length(files))
 
-plot_read("R1", paste0(prefix,".R1.pdf"))
-plot_read("R2", paste0(prefix,".R2.pdf"))
+plot_read("R1", paste0(prefix,".clipping_profile.R1.pdf"))
+plot_read("R2", paste0(prefix,".clipping_profile.R2.pdf"))

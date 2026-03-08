@@ -81,4 +81,4 @@ files <- list.files(
 samples <- sub("\\.inner_distance_freq.txt$", "", basename(files))
 cols <- rainbow(length(files))
 
-plot_read(files, samples, paste0(prefix, ".pdf"), cols)
+plot_read(files, samples, paste0(prefix, ".inner_distance_plot.pdf"), cols)

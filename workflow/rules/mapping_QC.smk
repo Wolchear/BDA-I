@@ -143,7 +143,8 @@ rule plot_clipping_aggr:
     input:
         expand(f"{PLOT_DIR}/clipping_profile/{{acc}}.clipping_profile.xls", acc=SRA)
     output:
-        f"{PREFIX}.clipping_profile.pdf"
+        r1 = f"{PREFIX}.clipping_profile.R1.pdf",
+        r2 = f"{PREFIX}.clipping_profile.R2.pdf",
     threads: 1
     params:
         script=AGGR_CLIP,

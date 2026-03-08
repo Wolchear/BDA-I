@@ -60,10 +60,9 @@ qc_plots:
     - 'mapping_rates'
   rseqc:
     - 'all.geneBodyCoverage.curves'
-    - 'all.clipping_profile'
+    - 'all.clipping_profile.R1'
     - 'all.inner_distance_plot'
     - 'all.splice_junction'
-  #  - 'all.splice_events'
 
 # States
 paired_id:
