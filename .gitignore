@@ -1,7 +1,6 @@
 .snakemake
 logs/*
 data/*
-QC/*
 
 *.pyc
 *.fasta
@@ -9,3 +8,11 @@ QC/*
 *.gz
 *.zip
 *.bam*
+*.r
+*.txt
+*.xls
+*.bed
+*.npz
+
+QC/raw/multiqc_data/*
+QC/trimmed/multiqc_data/*
