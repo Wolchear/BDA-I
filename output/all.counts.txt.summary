@@ -1,0 +1,15 @@
+Status	output/mapped/SRR11647685.sorted.bam	output/mapped/SRR11647686.sorted.bam	output/mapped/SRR11647687.sorted.bam	output/mapped/SRR11647695.sorted.bam	output/mapped/SRR11647696.sorted.bam	output/mapped/SRR11647697.sorted.bam
+Assigned	13221556	12388453	15233756	13096411	14602655	11996058
+Unassigned_Unmapped	0	0	0	0	0	0
+Unassigned_Read_Type	0	0	0	0	0	0
+Unassigned_Singleton	0	0	0	0	0	0
+Unassigned_MappingQuality	0	0	0	0	0	0
+Unassigned_Chimera	0	0	0	0	0	0
+Unassigned_FragmentLength	0	0	0	0	0	0
+Unassigned_Duplicate	0	0	0	0	0	0
+Unassigned_MultiMapping	3117423	4950389	4877633	7535792	4300283	2426273
+Unassigned_Secondary	0	0	0	0	0	0
+Unassigned_NonSplit	0	0	0	0	0	0
+Unassigned_NoFeatures	1786120	2785496	3141515	2920548	1654186	1342188
+Unassigned_Overlapping_Length	0	0	0	0	0	0
+Unassigned_Ambiguity	1717004	1706864	1812896	1646501	1867149	1566632

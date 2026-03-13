@@ -52,7 +52,8 @@ rule all:
             "{plot_dir}/strandness/{acc}.txt",
             acc=SRA,
             plot_dir=get_path(QC, 'mapping')
-        )
+        ),
+        f"{OUTPUT['base_root']}/all.counts.txt"
 
 
 RULES_DIR = get_path(config['workflow'], "rules")
@@ -81,3 +82,8 @@ module mapping_qc:
     snakefile: f"{RULES_DIR}/mapping_QC.smk"
     config: config
 use rule * from mapping_qc
+
+module quantify_expression:
+    snakefile: f"{RULES_DIR}/quantify_expression.smk"
+    config: config
+use rule * from quantify_expression

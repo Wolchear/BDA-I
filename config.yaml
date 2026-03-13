@@ -11,6 +11,7 @@ output:
   base_root: "output"
   dirs:
     mapped: 'mapped'
+    quantification: 'quantification'
 
 qc:
   base_root: "QC"
@@ -59,6 +60,7 @@ qc_plots:
     - 'pca'
   custom:
     - 'mapping_rates'
+    - 'assigned_rates'
   rseqc:
     - 'all.geneBodyCoverage.curves'
     - 'all.clipping_profile.R1'
@@ -84,6 +86,7 @@ hisat-build_params:
 
 mapping_qc_scripts:
     mapping_rates: workflow/scripts/plot_mapping_rates.py
+    assigned_rates: 'workflow/scripts/map_assigned.r'
     aggregate_clipping: workflow/scripts/aggregate_clipping_profiles.r
     aggregate_inner: workflow/scripts/aggregate_inner_distance.r
     aggregate_splice: workflow/scripts/aggregate_junction_anntotation.r
