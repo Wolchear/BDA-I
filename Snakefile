@@ -47,6 +47,11 @@ rule all:
             "{plot_dir}/{plot}.pdf",
             plot=PLOTS['rseqc'],
             plot_dir=get_path(QC, 'mapping')
+        ),
+        expand(
+            "{plot_dir}/strandness/{acc}.txt",
+            acc=SRA,
+            plot_dir=get_path(QC, 'mapping')
         )
 
 

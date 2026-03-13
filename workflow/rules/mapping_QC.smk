@@ -197,3 +197,15 @@ rule junction_annotation_aggr:
         r"""
         Rscript {params.script} {params.i_dir} {params.prefix}
         """
+
+rule check_strandness:
+    input:
+        bam = f"{MAPPED_DIR}/{{acc}}.sorted.bam",
+        bed = f"{REF_DIR}/{BED_ANNOT_CONF['file_name']}"
+    output:
+        f"{PLOT_DIR}/strandness/{{acc}}.txt"
+    threads: 1
+    shell:
+        r"""
+        infer_experiment.py -i {input.bam} -r {input.bed} > {output}
+        """
