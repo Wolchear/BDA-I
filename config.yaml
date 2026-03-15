@@ -74,6 +74,7 @@ analysis_results:
     - 'GSEA_list.rnk'
     - 'DEG_stat_diff.csv'
     - 'DEG_biological_diff.csv'
+    - 'vsd.rds'
 
 # States
 paired_id:

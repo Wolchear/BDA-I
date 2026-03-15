@@ -22,3 +22,5 @@ dependencies:
   - cutadapt>=5.2
   - subread>=2.1.1
   - bioconductor-deseq2>=1.5
+  - r-ggplot2>=4.0.0
+  - r-pheatmap>=1.0.13

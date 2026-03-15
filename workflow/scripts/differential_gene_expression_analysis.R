@@ -86,6 +86,7 @@ save_normalized_counts <- function(dds, out_dir) {
         file.path(out_dir, "normalized_counts_vst.csv"),
         row.names = TRUE
     )
+    saveRDS(vsd, file.path(out_dir, "vsd.rds"))
 }
 
 
