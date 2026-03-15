@@ -21,3 +21,4 @@ dependencies:
   - rseqc>=5.0
   - cutadapt>=5.2
   - subread>=2.1.1
+  - bioconductor-deseq2>=1.5

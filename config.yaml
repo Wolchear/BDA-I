@@ -12,6 +12,7 @@ output:
   dirs:
     mapped: 'mapped'
     quantification: 'quantification'
+    diff_analysis: 'differential_gene_expression_analysis'
 
 qc:
   base_root: "QC"
@@ -67,6 +68,13 @@ qc_plots:
     - 'all.inner_distance_plot'
     - 'all.splice_junction'
 
+analysis_results:
+  diff_analysis:
+    - 'normalized_counts_vst.csv'
+    - 'GSEA_list.rnk'
+    - 'DEG_stat_diff.csv'
+    - 'DEG_biological_diff.csv'
+
 # States
 paired_id:
   - 1
@@ -90,3 +98,7 @@ mapping_qc_scripts:
     aggregate_clipping: workflow/scripts/aggregate_clipping_profiles.r
     aggregate_inner: workflow/scripts/aggregate_inner_distance.r
     aggregate_splice: workflow/scripts/aggregate_junction_anntotation.r
+
+
+analysis_scipts:
+  diff_analysis: 'workflow/scripts/differential_gene_expression_analysis.R'
