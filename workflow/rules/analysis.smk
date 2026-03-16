@@ -33,6 +33,7 @@ rule plot_bio_deg:
         meta=f"{OUT_DIR}/metadata.tsv"
     output:
         f"{DIFF_ANALYSIS_PLOTS_DIR}/DEG_biological.png"
+    threads: 1
     params:
         genes_n=50,
         script=ANALYSIS_SCRIPTS['deg_heat']
@@ -53,15 +54,30 @@ rule plot_stat_deg:
         meta=f"{OUT_DIR}/metadata.tsv"
     output:
         f"{DIFF_ANALYSIS_PLOTS_DIR}/DEG_stat.png"
+    threads: 1
     params:
         genes_n=50,
         script=ANALYSIS_SCRIPTS['deg_heat']
     shell:
-        """
+        r"""
         Rscript {params.script} \
             {input.vst} \
             {input.deg} \
             {input.meta} \
             {output} \
             {params.genes_n}
+        """
+
+rule plot_volcano:
+    input:
+        rules.peform_diff_analysis.output.deseq_object
+    output:
+        f"{DIFF_ANALYSIS_PLOTS_DIR}/volcano_plot.png"
+    params:
+        out_dir=DIFF_ANALYSIS_PLOTS_DIR,
+        script=ANALYSIS_SCRIPTS['volcano']
+    threads: 1
+    shell:
+        """
+        Rscript {params.script} {input} {params.out_dir}
         """

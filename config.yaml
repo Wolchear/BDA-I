@@ -80,6 +80,7 @@ analysis_results:
   plots:
     - 'DEG_stat.png'
     - 'DEG_biological.png'
+    - 'volcano_plot.png'
 
 # States
 paired_id:
@@ -109,3 +110,4 @@ mapping_qc_scripts:
 analysis_scipts:
   diff_analysis: 'workflow/scripts/differential_gene_expression_analysis.R'
   deg_heat: 'workflow/scripts/plot_degs_heatmap.R'
+  volcano:  'workflow/scripts/plot_volcano.R'
