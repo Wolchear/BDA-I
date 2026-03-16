@@ -16,3 +16,5 @@ data/*
 
 QC/raw/multiqc_data/*
 QC/trimmed/multiqc_data/*
+
+*.rds
