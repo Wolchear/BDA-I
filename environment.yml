@@ -26,3 +26,4 @@ dependencies:
   - r-pheatmap>=1.0.13
   - r-tidyverse>=2.0.0
   - bioconductor-apeglm>=1.32.0
+  - r-ggrepel>=0.9.6
