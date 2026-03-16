@@ -8,7 +8,7 @@ draw_ma <- function(dds, out_dir) {
     )
 
     png(file.path(out_dir, "MA_plot.png"), width = 1800, height = 1400, res = 200)
-    plotMA(res_shrunk)
+    plotMA(res_shrunk, ylim=c(-10,10))
     dev.off()
 }
 

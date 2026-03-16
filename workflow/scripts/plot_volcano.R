@@ -78,7 +78,7 @@ draw_volcano <- function(res_df, out_dir) {
 
     ggsave(
         filename = file.path(out_dir, "volcano_plot.png"),
-        plot = p,
+        plot = p, # + coord_cartesian(ylim = c(0, 25)),
         width = 8,
         height = 7,
         dpi = 300
