@@ -83,6 +83,7 @@ analysis_results:
     - 'volcano_plot.png'
     - 'MA_plot.png'
     - 'PCA_plot.png'
+    - 'sample_correlation_heatmap.png'
 
 # States
 paired_id:
@@ -115,3 +116,5 @@ analysis_scipts:
   volcano:  'workflow/scripts/plot_volcano.R'
   ma_plot:  'workflow/scripts/plot_MA.R'
   pca_plot:  'workflow/scripts/plot_PCA.R'
+  samples_correaltion: 'workflow/scripts/plot_samples_correlation.R'
+ 

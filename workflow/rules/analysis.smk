@@ -109,3 +109,17 @@ rule plot_PCA_vsd:
         """
         Rscript {params.script} {input} {params.out_dir}
         """
+
+rule plot_samples_correlation:
+    input:
+        rules.peform_diff_analysis.output.normalized_object
+    output:
+        f"{DIFF_ANALYSIS_PLOTS_DIR}/sample_correlation_heatmap.png"
+    params:
+        out_dir=DIFF_ANALYSIS_PLOTS_DIR,
+        script=ANALYSIS_SCRIPTS['samples_correaltion']
+    threads: 1
+    shell:
+        """
+        Rscript {params.script} {input} {params.out_dir}
+        """

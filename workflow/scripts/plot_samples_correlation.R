@@ -1,7 +1,5 @@
 suppressPackageStartupMessages(library(DESeq2))
-suppressPackageStartupMessages(library(tidyverse))
 suppressPackageStartupMessages(library(pheatmap))
-suppressPackageStartupMessages(library(ggrepel))
 
 
 draw_heatmap <- function(norm_counts, out_dir) {
@@ -20,13 +18,18 @@ draw_heatmap <- function(norm_counts, out_dir) {
         height = 7
     )
 }
-args <- commandArgs(trailingOnly = TRUE)
 
-deseq_obj_file <- args[1]
-out_dir <- args[2]
+parse_args <- function() {
+    args <- commandArgs(trailingOnly = TRUE)
 
-dds <- readRDS(deseq_obj_file)
-vsd <- vst(dds, blind = FALSE)
+    list(
+        vsd_file = args[1],
+        out_dir = args[2]
+    )
+}
+
+args <- parse_args()
+
+vsd <- readRDS(args$vsd_file)
 norm_counts <- assay(vsd)
-
-draw_heatmap(norm_counts, out_dir)
+draw_heatmap(norm_counts, args$out_dir)
