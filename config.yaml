@@ -82,6 +82,7 @@ analysis_results:
     - 'DEG_biological.png'
     - 'volcano_plot.png'
     - 'MA_plot.png'
+    - 'PCA_plot.png'
 
 # States
 paired_id:
@@ -113,3 +114,4 @@ analysis_scipts:
   deg_heat: 'workflow/scripts/plot_degs_heatmap.R'
   volcano:  'workflow/scripts/plot_volcano.R'
   ma_plot:  'workflow/scripts/plot_MA.R'
+  pca_plot:  'workflow/scripts/plot_PCA.R'

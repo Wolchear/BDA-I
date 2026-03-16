@@ -20,26 +20,6 @@ draw_heatmap <- function(norm_counts, out_dir) {
         height = 7
     )
 }
-
-draw_pca <- function(vsd, out_dir) {
-    pca_data <- plotPCA(vsd, intgroup = "status", returnData = TRUE)
-    percentVar <- round(100 * attr(pca_data, "percentVar"))
-
-    p <- ggplot(pca_data, aes(x = PC1, y = PC2, color = status)) +
-            geom_point(size =3) +
-            xlab(paste0("PC1: ", percentVar[1], "% variance")) +
-            ylab(paste0("PC2: ", percentVar[2], "% variance")) +
-            coord_fixed() +
-            ggtitle("PCA with VST data")
-    
-    ggsave(
-        filename = file.path(out_dir, "PCA_plot.png"),
-        plot = p,
-        width = 8,
-        height = 7,
-        dpi = 300
-    )
-}
 args <- commandArgs(trailingOnly = TRUE)
 
 deseq_obj_file <- args[1]
@@ -50,4 +30,3 @@ vsd <- vst(dds, blind = FALSE)
 norm_counts <- assay(vsd)
 
 draw_heatmap(norm_counts, out_dir)
-draw_pca(vsd, out_dir)

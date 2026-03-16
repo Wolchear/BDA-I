@@ -95,3 +95,17 @@ rule plot_MA:
         """
         Rscript {params.script} {input} {params.out_dir}
         """
+
+rule plot_PCA_vsd:
+    input:
+        rules.peform_diff_analysis.output.normalized_object
+    output:
+        f"{DIFF_ANALYSIS_PLOTS_DIR}/PCA_plot.png"
+    params:
+        out_dir=DIFF_ANALYSIS_PLOTS_DIR,
+        script=ANALYSIS_SCRIPTS['pca_plot']
+    threads: 1
+    shell:
+        """
+        Rscript {params.script} {input} {params.out_dir}
+        """
