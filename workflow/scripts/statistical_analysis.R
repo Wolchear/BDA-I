@@ -40,19 +40,6 @@ draw_pca <- function(vsd, out_dir) {
         dpi = 300
     )
 }
-
-draw_ma <- function(dds, out_dir) {
-    res_shrunk <- lfcShrink(
-        dds,
-        coef = "status_cancer_vs_healthy",
-        type = "apeglm"
-    )
-
-    png(file.path(out_dir, "MA_plot.png"), width = 1800, height = 1400, res = 200)
-    plotMA(res_shrunk, ylim = c(-5, 5))
-    dev.off()
-}
-
 args <- commandArgs(trailingOnly = TRUE)
 
 deseq_obj_file <- args[1]
@@ -64,5 +51,3 @@ norm_counts <- assay(vsd)
 
 draw_heatmap(norm_counts, out_dir)
 draw_pca(vsd, out_dir)
-
-draw_ma(dds, out_dir)

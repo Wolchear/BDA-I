@@ -81,3 +81,17 @@ rule plot_volcano:
         """
         Rscript {params.script} {input} {params.out_dir}
         """
+
+rule plot_MA:
+    input:
+        rules.peform_diff_analysis.output.deseq_object
+    output:
+        f"{DIFF_ANALYSIS_PLOTS_DIR}/MA_plot.png"
+    params:
+        out_dir=DIFF_ANALYSIS_PLOTS_DIR,
+        script=ANALYSIS_SCRIPTS['ma_plot']
+    threads: 1
+    shell:
+        """
+        Rscript {params.script} {input} {params.out_dir}
+        """
