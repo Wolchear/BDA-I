@@ -84,6 +84,8 @@ analysis_results:
     - 'MA_plot.png'
     - 'PCA_plot.png'
     - 'sample_correlation_heatmap.png'
+    - 'normalized_counts.png'
+    - 'raw_counts.png'
 
 # States
 paired_id:
@@ -117,4 +119,5 @@ analysis_scipts:
   ma_plot:  'workflow/scripts/plot_MA.R'
   pca_plot:  'workflow/scripts/plot_PCA.R'
   samples_correaltion: 'workflow/scripts/plot_samples_correlation.R'
+  norm_raw_compare: 'workflow/scripts/norm_raw_compare.R'
  

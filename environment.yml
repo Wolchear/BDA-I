@@ -28,3 +28,4 @@ dependencies:
   - bioconductor-apeglm>=1.32.0
   - r-ggrepel>=0.9.6
   - r-rcolorbrewer
+  - r-patchwork>= 1.3

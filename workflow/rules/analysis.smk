@@ -124,3 +124,19 @@ rule plot_samples_correlation:
         """
         Rscript {params.script} {input.vsd} {params.out_dir} {input.metadata}
         """
+
+rule compare_raw_norm:
+    input:
+        dds = rules.peform_diff_analysis.output.deseq_object,
+        metadata = f"{OUT_DIR}/metadata.tsv"
+    output:
+        norm = f"{DIFF_ANALYSIS_PLOTS_DIR}/normalized_counts.png",
+        raw =f"{DIFF_ANALYSIS_PLOTS_DIR}/raw_counts.png"
+    params:
+        out_dir=DIFF_ANALYSIS_PLOTS_DIR,
+        script=ANALYSIS_SCRIPTS['norm_raw_compare']
+    threads: 1
+    shell:
+        """
+        Rscript {params.script} {input.dds} {params.out_dir} {input.metadata}
+        """
