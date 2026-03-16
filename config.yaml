@@ -75,6 +75,7 @@ analysis_results:
     - 'DEG_stat_diff.csv'
     - 'DEG_biological_diff.csv'
     - 'vsd.rds'
+    - 'dds.rds'
 
 # States
 paired_id:

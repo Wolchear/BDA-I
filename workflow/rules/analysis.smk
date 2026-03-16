@@ -15,7 +15,8 @@ rule peform_diff_analysis:
         bio_deg= f"{DIFF_ANALYSIS_DIR}/DEG_biological_diff.csv",
         gene_list = f"{DIFF_ANALYSIS_DIR}/GSEA_list.rnk",
         normalized_counts=f"{DIFF_ANALYSIS_DIR}/normalized_counts_vst.csv",
-        normalized_object=f"{DIFF_ANALYSIS_DIR}/vsd.rds"
+        normalized_object=f"{DIFF_ANALYSIS_DIR}/vsd.rds",
+        deseq_object=f"{DIFF_ANALYSIS_DIR}/dds.rds"
     params:
         out_dir=DIFF_ANALYSIS_DIR,
         script=DIFF_ANALYSIS_SCRIPT

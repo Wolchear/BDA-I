@@ -24,3 +24,5 @@ dependencies:
   - bioconductor-deseq2>=1.5
   - r-ggplot2>=4.0.0
   - r-pheatmap>=1.0.13
+  - r-tidyverse>=2.0.0
+  - bioconductor-apeglm>=1.32.0

@@ -60,11 +60,11 @@ save_degs <- function(res, out_dir) {
 }
 
 save_gsea_list <- function(res, out_dir) {
-    res_gsea <- res[!is.na(res$stat), ]
-    res_ordered <- res_gsea[order(res_gsea$stat, decreasing = TRUE), ]
+    res_gsea <- res[!is.na(res$log2FoldChange), ]
+    res_ordered <- res_gsea[order(res_gsea$log2FoldChange, decreasing = TRUE), ]
     gsea_table <- data.frame(
         gene = rownames(res_ordered),
-        stat = res_ordered$stat
+        stat = res_ordered$log2FoldChange
     )
 
     write.table(
@@ -99,8 +99,12 @@ out_dir <- args[3]
 matrix <- get_matrix(count_matrix_file)
 metadata <- read_meta(meta_file)
 dds <- prepare_dseq_obj(matrix, metadata)
-
-res <- results(dds)
+saveRDS(dds, file.path(out_dir, "dds.rds"))
+res <- lfcShrink(
+        dds,
+        coef="status_cancer_vs_healthy",
+        type="apeglm"
+    )
 
 save_degs(res, out_dir)
 save_gsea_list(res, out_dir)
