@@ -112,7 +112,8 @@ rule plot_PCA_vsd:
 
 rule plot_samples_correlation:
     input:
-        rules.peform_diff_analysis.output.normalized_object
+        vsd = rules.peform_diff_analysis.output.normalized_object,
+        metadata = f"{OUT_DIR}/metadata.tsv"
     output:
         f"{DIFF_ANALYSIS_PLOTS_DIR}/sample_correlation_heatmap.png"
     params:
@@ -121,5 +122,5 @@ rule plot_samples_correlation:
     threads: 1
     shell:
         """
-        Rscript {params.script} {input} {params.out_dir}
+        Rscript {params.script} {input.vsd} {params.out_dir} {input.metadata}
         """
