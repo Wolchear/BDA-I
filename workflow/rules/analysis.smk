@@ -2,7 +2,7 @@ from workflow.lib.utils import get_path
 
 OUT_DIR = config["output"]['base_root']
 DIFF_ANALYSIS_DIR = get_path(config["output"],'diff_analysis')
-
+DIFF_ANALYSIS_PLOTS_DIR = get_path(config["output"],'stat_plots')
 ANALYSIS_SCRIPTS = config['analysis_scipts']
 DIFF_ANALYSIS_SCRIPT = ANALYSIS_SCRIPTS['diff_analysis']
 
@@ -24,4 +24,44 @@ rule peform_diff_analysis:
     shell:
         """
         Rscript {params.script} {input.counts} {input.metadata} {params.out_dir}
+        """
+
+rule plot_bio_deg:
+    input:
+        vst=rules.peform_diff_analysis.output.normalized_counts,
+        deg=rules.peform_diff_analysis.output.bio_deg,
+        meta=f"{OUT_DIR}/metadata.tsv"
+    output:
+        f"{DIFF_ANALYSIS_PLOTS_DIR}/DEG_biological.png"
+    params:
+        genes_n=50,
+        script=ANALYSIS_SCRIPTS['deg_heat']
+    shell:
+        """
+        Rscript {params.script} \
+            {input.vst} \
+            {input.deg} \
+            {input.meta} \
+            {output} \
+            {params.genes_n}
+        """
+
+rule plot_stat_deg:
+    input:
+        vst=rules.peform_diff_analysis.output.normalized_counts,
+        deg=rules.peform_diff_analysis.output.stad_deg,
+        meta=f"{OUT_DIR}/metadata.tsv"
+    output:
+        f"{DIFF_ANALYSIS_PLOTS_DIR}/DEG_stat.png"
+    params:
+        genes_n=50,
+        script=ANALYSIS_SCRIPTS['deg_heat']
+    shell:
+        """
+        Rscript {params.script} \
+            {input.vst} \
+            {input.deg} \
+            {input.meta} \
+            {output} \
+            {params.genes_n}
         """

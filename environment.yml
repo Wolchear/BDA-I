@@ -27,3 +27,4 @@ dependencies:
   - r-tidyverse>=2.0.0
   - bioconductor-apeglm>=1.32.0
   - r-ggrepel>=0.9.6
+  - r-rcolorbrewer

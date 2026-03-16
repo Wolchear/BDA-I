@@ -57,9 +57,9 @@ rule all:
         f"{OUTPUT['base_root']}/all.counts.txt",
         expand(
             "{out_dir}/{results}",
-            out_dir=get_path(OUTPUT,'diff_analysis'),
-            results=ANALYSIS['diff_analysis']
-        )
+            out_dir=get_path(OUTPUT,'stat_plots'),
+            results=ANALYSIS['plots']
+        ),
 
 
 RULES_DIR = get_path(config['workflow'], "rules")

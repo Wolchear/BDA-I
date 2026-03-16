@@ -13,6 +13,7 @@ output:
     mapped: 'mapped'
     quantification: 'quantification'
     diff_analysis: 'differential_gene_expression_analysis'
+    stat_plots: 'differential_gene_expression_analysis_plots'
 
 qc:
   base_root: "QC"
@@ -76,6 +77,9 @@ analysis_results:
     - 'DEG_biological_diff.csv'
     - 'vsd.rds'
     - 'dds.rds'
+  plots:
+    - 'DEG_stat.png'
+    - 'DEG_biological.png'
 
 # States
 paired_id:
@@ -104,3 +108,4 @@ mapping_qc_scripts:
 
 analysis_scipts:
   diff_analysis: 'workflow/scripts/differential_gene_expression_analysis.R'
+  deg_heat: 'workflow/scripts/plot_degs_heatmap.R'
