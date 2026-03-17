@@ -29,3 +29,5 @@ dependencies:
   - r-ggrepel>=0.9.6
   - r-rcolorbrewer
   - r-patchwork>= 1.3
+  - bioconductor-org.hs.eg.db>=3.22
+  - bioconductor-clusterprofiler>=4.18

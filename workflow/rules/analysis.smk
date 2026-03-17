@@ -3,8 +3,7 @@ from workflow.lib.utils import get_path
 OUT_DIR = config["output"]['base_root']
 DIFF_ANALYSIS_DIR = get_path(config["output"],'diff_analysis')
 DIFF_ANALYSIS_PLOTS_DIR = get_path(config["output"],'stat_plots')
-ANALYSIS_SCRIPTS = config['analysis_scipts']
-DIFF_ANALYSIS_SCRIPT = ANALYSIS_SCRIPTS['diff_analysis']
+ANALYSIS_SCRIPTS = config['analysis_scipts']['stat']
 
 rule peform_diff_analysis:
     input:
@@ -19,7 +18,7 @@ rule peform_diff_analysis:
         deseq_object=f"{DIFF_ANALYSIS_DIR}/dds.rds"
     params:
         out_dir=DIFF_ANALYSIS_DIR,
-        script=DIFF_ANALYSIS_SCRIPT
+        script=ANALYSIS_SCRIPTS['diff_analysis']
     threads: 1
     shell:
         """

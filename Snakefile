@@ -60,7 +60,11 @@ rule all:
             out_dir=get_path(OUTPUT,'stat_plots'),
             results=ANALYSIS['plots']
         ),
-
+        expand(
+            "{out_dir}/{results}",
+            out_dir=get_path(OUTPUT,'stat_plots'),
+            results=ANALYSIS['bio_analysis']
+        ),
 
 RULES_DIR = get_path(config['workflow'], "rules")
 
@@ -98,3 +102,8 @@ module analysis:
     snakefile: f"{RULES_DIR}/analysis.smk"
     config: config
 use rule * from analysis
+
+module bio_analysis:
+    snakefile: f"{RULES_DIR}/bio_analysis.smk"
+    config: config
+use rule * from bio_analysis

@@ -14,6 +14,7 @@ output:
     quantification: 'quantification'
     diff_analysis: 'differential_gene_expression_analysis'
     stat_plots: 'differential_gene_expression_analysis_plots'
+    bio_analysis: 'biological_analysis'
 
 qc:
   base_root: "QC"
@@ -86,6 +87,10 @@ analysis_results:
     - 'sample_correlation_heatmap.png'
     - 'normalized_counts.png'
     - 'raw_counts.png'
+  bio_analysis:
+    - 'top_down_list.tsv'
+    - 'ora_dotplot.png'
+    - 'ora_barplot.png'
 
 # States
 paired_id:
@@ -113,11 +118,15 @@ mapping_qc_scripts:
 
 
 analysis_scipts:
-  diff_analysis: 'workflow/scripts/differential_gene_expression_analysis.R'
-  deg_heat: 'workflow/scripts/plot_degs_heatmap.R'
-  volcano:  'workflow/scripts/plot_volcano.R'
-  ma_plot:  'workflow/scripts/plot_MA.R'
-  pca_plot:  'workflow/scripts/plot_PCA.R'
-  samples_correaltion: 'workflow/scripts/plot_samples_correlation.R'
-  norm_raw_compare: 'workflow/scripts/norm_raw_compare.R'
+  stat:
+    diff_analysis: 'workflow/scripts/differential_gene_expression_analysis.R'
+    deg_heat: 'workflow/scripts/plot_degs_heatmap.R'
+    volcano:  'workflow/scripts/plot_volcano.R'
+    ma_plot:  'workflow/scripts/plot_MA.R'
+    pca_plot:  'workflow/scripts/plot_PCA.R'
+    samples_correaltion: 'workflow/scripts/plot_samples_correlation.R'
+    norm_raw_compare: 'workflow/scripts/norm_raw_compare.R'
+  bio:
+    top_list: 'workflow/scripts/get_up_down_list.R'
+    ora: 'workflow/scripts/perfrom_ora.R'
  
