@@ -91,6 +91,11 @@ analysis_results:
     - 'top_down_list.tsv'
     - 'ora_dotplot.png'
     - 'ora_barplot.png'
+    - 'gsea_msigdb_dotplot.png'
+    - 'gsea_go_dotplot.png'
+    - 'gsea_go_top1.png'
+    - 'gsea_msigdb_top1.png'
+
 
 # States
 paired_id:
@@ -129,4 +134,5 @@ analysis_scipts:
   bio:
     top_list: 'workflow/scripts/get_up_down_list.R'
     ora: 'workflow/scripts/perfrom_ora.R'
+    gsea: 'workflow/scripts/perfrom_gsea.R'
  
