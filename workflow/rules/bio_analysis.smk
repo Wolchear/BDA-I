@@ -52,3 +52,18 @@ rule perform_gsea:
         """
         Rscript {params.script} {input} {params.output}
         """
+
+rule perform_pear:
+    input:
+        f"{DIFF_ANALYSIS_DIR}/GSEA_list.rnk"
+    output:
+        html = f"{ANALYSIS_DIR}/gsea_pear.html"
+        png = f"{ANALYSIS_DIR}/gsea_pear.png"
+    threads: 1
+    params:
+        script=ANALYSIS_SCRIPTS['apear'],
+        out_dir=ANALYSIS_DIR
+    shell:
+        """
+        Rscript {params.script} {input} {params.output}
+        """

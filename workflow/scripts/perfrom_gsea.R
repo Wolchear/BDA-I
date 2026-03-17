@@ -4,6 +4,9 @@ suppressPackageStartupMessages(library(msigdbr))
 suppressPackageStartupMessages(library(enrichplot))
 suppressPackageStartupMessages(library(ggplot2))
 suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(DOSE))
+suppressPackageStartupMessages(library(aPEAR))
+
 
 get_ranked_list <- function(rank_file) {
     ranked_df <- read.table(rank_file, row.names = 1)
@@ -71,6 +74,8 @@ perform_over_mig_db <- function(converted_list) {
     return(gsea_msig)
 }
 
+
+
 draw_gsea_top_plot <- function(gsea_obj, out_file) {
     p <- gseaplot2(
         gsea_obj,
@@ -105,10 +110,6 @@ transformed_list <- transform_ids(ranked_list)
 
 go_res <- perform_over_go(ranked_list)
 msig_res <- perform_over_mig_db(transformed_list)
-
-go_df <- as.data.frame(go_res)
-msig_df <- as.data.frame(msig_res)
-
 
 draw_gsea_dotplot(go_res, file.path(args$out_dir, "gsea_go_dotplot.png"), "GO GSEA dotplot")
 draw_gsea_top_plot(go_res, file.path(args$out_dir, "gsea_go_top1.png"))

@@ -1,0 +1,8 @@
+#!/usr/bin/env Rscript
+suppressPackageStartupMessages(library(devtools))
+
+if (!requireNamespace("aPEAR", quietly = TRUE)) {
+    devtools::install_github("ievaKer/aPEAR", upgrade = "never")
+} else {
+    message("aPEAR is already installed.")
+}

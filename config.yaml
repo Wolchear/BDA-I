@@ -95,6 +95,9 @@ analysis_results:
     - 'gsea_go_dotplot.png'
     - 'gsea_go_top1.png'
     - 'gsea_msigdb_top1.png'
+    - 'gsea_pear.png'
+    - 'gsea_pear.html'
+    - 'gsea_pear.png'
 
 
 # States
@@ -135,4 +138,4 @@ analysis_scipts:
     top_list: 'workflow/scripts/get_up_down_list.R'
     ora: 'workflow/scripts/perfrom_ora.R'
     gsea: 'workflow/scripts/perfrom_gsea.R'
- 
+    apear: 'workflow/scripts/perfrom_apear.R'
