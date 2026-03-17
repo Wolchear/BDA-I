@@ -35,9 +35,10 @@ perform_over_go <- function(ranked_list) {
     return(gsea)
 }
 
-get_pear_plot <- function(gsea) {
+get_pear_plot <- function(gsea, n_paths) {
+    gsea_df <- gsea@result
     p <- enrichmentNetwork(
-            gsea@result,
+            head(gsea_df, n_paths),
             drawEllipses = TRUE,
             fontSize = 2.5
         )
@@ -52,7 +53,8 @@ parse_args <- function() {
 
     list(
         rank_file = args[1],
-        out_dir = args[2]
+        out_dir = args[2],
+        n_paths = as.numeric(args[3])
     )
 }
 
@@ -61,7 +63,7 @@ args <- parse_args()
 ranked_list <- get_ranked_list(args$rank_file)
 go_res <- perform_over_go(ranked_list)
 
-p <- get_pear_plot(go_res)
+p <- get_pear_plot(go_res, args$n_paths)
 ggsave(file.path(args$out_dir, "gsea_pear.png"), p)
 
 p_int <- ggplotly(p, tooltip = c("ID", "Cluster", "Cluster size"))

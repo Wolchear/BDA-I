@@ -62,8 +62,9 @@ rule perform_pear:
     threads: 1
     params:
         script=ANALYSIS_SCRIPTS['apear'],
-        out_dir=ANALYSIS_DIR
+        out_dir=ANALYSIS_DIR,
+        n_paths=30
     shell:
         """
-        Rscript {params.script} {input} {params.output}
+        Rscript {params.script} {input} {params.out_dir} {params.n_paths}
         """
