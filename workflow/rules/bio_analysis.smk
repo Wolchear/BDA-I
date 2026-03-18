@@ -40,8 +40,10 @@ rule perform_gsea:
     input:
         f"{DIFF_ANALYSIS_DIR}/GSEA_list.rnk"
     output:
-        dotplot_go = f"{ANALYSIS_DIR}/gsea_go_dotplot.png",
-        dotplot_mig = f"{ANALYSIS_DIR}/gsea_msigdb_dotplot.png",
+        dotplot_go_up = f"{ANALYSIS_DIR}/gsea_go_dotplot_up.png",
+        dotplot_go_down = f"{ANALYSIS_DIR}/gsea_go_dotplot_down.png",
+        dotplot_mig_up = f"{ANALYSIS_DIR}/gsea_msigdb_dotplot_up.png",
+        dotplot_mig_down = f"{ANALYSIS_DIR}/gsea_msigdb_dotplot_down.png",
         top_go = f"{ANALYSIS_DIR}/gsea_go_top1.png",
         top_mig = f"{ANALYSIS_DIR}/gsea_msigdb_top1.png"
     threads: 1
@@ -63,7 +65,7 @@ rule perform_pear:
     params:
         script=ANALYSIS_SCRIPTS['apear'],
         out_dir=ANALYSIS_DIR,
-        n_paths=30
+        n_paths=100
     shell:
         """
         Rscript {params.script} {input} {params.out_dir} {params.n_paths}
