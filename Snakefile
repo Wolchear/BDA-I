@@ -62,7 +62,7 @@ rule all:
         ),
         expand(
             "{out_dir}/{results}",
-            out_dir=get_path(OUTPUT,'stat_plots'),
+            out_dir=get_path(OUTPUT,'bio_analysis'),
             results=ANALYSIS['bio_analysis']
         ),
 

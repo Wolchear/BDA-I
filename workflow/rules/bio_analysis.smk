@@ -40,9 +40,9 @@ rule perform_gsea:
     input:
         f"{DIFF_ANALYSIS_DIR}/GSEA_list.rnk"
     output:
-        dotplot_go = f"{ANALYSIS_DIR}/gsea_go_dotplot.png"
-        dotplot_mig = f"{ANALYSIS_DIR}/gsea_msigdb_dotplot.png"
-        top_go = f"{ANALYSIS_DIR}/gsea_go_top1.png"
+        dotplot_go = f"{ANALYSIS_DIR}/gsea_go_dotplot.png",
+        dotplot_mig = f"{ANALYSIS_DIR}/gsea_msigdb_dotplot.png",
+        top_go = f"{ANALYSIS_DIR}/gsea_go_top1.png",
         top_mig = f"{ANALYSIS_DIR}/gsea_msigdb_top1.png"
     threads: 1
     params:
@@ -50,14 +50,14 @@ rule perform_gsea:
         out_dir=ANALYSIS_DIR
     shell:
         """
-        Rscript {params.script} {input} {params.output}
+        Rscript {params.script} {input} {params.out_dir}
         """
 
 rule perform_pear:
     input:
         f"{DIFF_ANALYSIS_DIR}/GSEA_list.rnk"
     output:
-        html = f"{ANALYSIS_DIR}/gsea_pear.html"
+        html = f"{ANALYSIS_DIR}/gsea_pear.html",
         png = f"{ANALYSIS_DIR}/gsea_pear.png"
     threads: 1
     params:
