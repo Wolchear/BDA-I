@@ -86,11 +86,43 @@ draw_gsea_top_plot <- function(gsea_obj, out_file) {
     ggsave(out_file, p, width = 10, height = 7)
 }
 
-draw_gsea_dotplot <- function(gsea_obj, out_file, title_text) {
-    p <- dotplot(gsea_obj, showCategory = 20) +
-        labs(title = title_text) +
+draw_gsea_dotplot <- function(gsea_obj, out_file, title_text, direction = "up") {
+    
+    df <- gsea_obj@result %>%
+        as.data.frame() %>%
+        filter(!is.na(NES), !is.na(p.adjust))
+    
+    if (direction == "up") {
+        df <- df %>%
+            filter(NES > 0) %>%
+            arrange(desc(NES))
+    } else if (direction == "down") {
+        df <- df %>%
+            filter(NES < 0) %>%
+            arrange(NES)
+    }
+    
+    df <- df %>% head(20)
+    
+    df$Description <- factor(df$Description, levels = rev(df$Description))
+    
+    p <- ggplot(df, aes(x = NES, y = Description)) +
+        geom_point(aes(size = setSize, color = NES)) +
+        scale_color_gradient2(
+            low = "blue",
+            mid = "white",
+            high = "red",
+            midpoint = 0
+        ) +
+        labs(
+            title = title_text,
+            x = "NES",
+            y = NULL,
+            color = "NES",
+            size = "Set size"
+        ) +
         theme_minimal()
-
+    
     ggsave(out_file, p, width = 10, height = 7)
 }
 
@@ -111,8 +143,10 @@ transformed_list <- transform_ids(ranked_list)
 go_res <- perform_over_go(ranked_list)
 msig_res <- perform_over_mig_db(transformed_list)
 
-draw_gsea_dotplot(go_res, file.path(args$out_dir, "gsea_go_dotplot.png"), "GO GSEA dotplot")
+draw_gsea_dotplot(go_res, file.path(args$out_dir, "gsea_go_dotplot_up.png"), "GO GSEA dotplot", 'up')
+draw_gsea_dotplot(go_res, file.path(args$out_dir, "gsea_go_dotplot_down.png"), "GO GSEA dotplot", 'down')
 draw_gsea_top_plot(go_res, file.path(args$out_dir, "gsea_go_top1.png"))
 
-draw_gsea_dotplot(msig_res, file.path(args$out_dir, "gsea_msigdb_dotplot.png"), "MSigDB GSEA dotplot")
+draw_gsea_dotplot(msig_res, file.path(args$out_dir, "gsea_msigdb_dotplot_up.png"), "MSigDB GSEA dotplot", 'up')
+draw_gsea_dotplot(msig_res, file.path(args$out_dir, "gsea_msigdb_dotplot_down.png"), "MSigDB GSEA dotplot", 'down')
 draw_gsea_top_plot(msig_res, file.path(args$out_dir, "gsea_msigdb_top1.png"))
